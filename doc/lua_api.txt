@@ -1412,10 +1412,14 @@ examples.
 * `fixed_size`: `true`/`false` (optional)
 * deprecated: `invsize[<W>,<H>;]`
 
-#### `offset[<X>,<Y>]`
-* Move all elements defined after this by (X, Y)
-* Good for modifying formspec elements you didn't write (eg: writing a formspec theme for sfinv)
-* Not recommended to be used to make lists.
+#### `container[<X>,<Y>]`
+* Start of a container block, moves all physical elements in the container by (X, Y)
+* Must have matching container_end
+* Containers can be nested, in which case the offsets are added
+  (child containers are relative to parent containers)
+
+#### `container_end[]`
+* End of a container, following elements are no longer relative to this container
 
 #### `list[<inventory location>;<list name>;<X>,<Y>;<W>,<H>;]`
 * Show an inventory list

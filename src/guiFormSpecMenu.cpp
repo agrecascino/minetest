@@ -278,19 +278,30 @@ void GUIFormSpecMenu::parseSize(parserData* data,std::string element)
 	errorstream<< "Invalid size element (" << parts.size() << "): '" << element << "'"  << std::endl;
 }
 
-void GUIFormSpecMenu::parseOffset(parserData* data, std::string element)
+void GUIFormSpecMenu::parseContainer(parserData* data, std::string element)
 {
 	std::vector<std::string> parts = split(element,',');
 
-	if (parts.size() == 2) {
+	if (parts.size() >= 2) {
 		if (parts[1].find(';') != std::string::npos)
 			parts[1] = parts[1].substr(0, parts[1].find(';'));
 
+		container_stack.push(pos_offset);
 		pos_offset.X += MYMAX(0, stof(parts[0]));
 		pos_offset.Y += MYMAX(0, stof(parts[1]));
 		return;
 	}
-	errorstream<< "Invalid offset element (" << parts.size() << "): '" << element << "'"  << std::endl;
+	errorstream<< "Invalid container start element (" << parts.size() << "): '" << element << "'"  << std::endl;
+}
+
+void GUIFormSpecMenu::parseContainerEnd(parserData* data)
+{
+	if (container_stack.empty()) {
+		errorstream<< "Invalid container end element, no matching container start element"  << std::endl;
+	} else {
+		pos_offset = container_stack.top();
+		container_stack.pop();
+	}
 }
 
 void GUIFormSpecMenu::parseList(parserData* data,std::string element)
@@ -1687,8 +1698,14 @@ void GUIFormSpecMenu::parseElement(parserData* data, std::string element)
 	std::string type = trim(parts[0]);
 	std::string description = trim(parts[1]);
 
-	if (type == "offset") {
-		parseOffset(data, description);
+	if (type == "container") {
+		parseContainer(data, description);
+		return;
+	}
+
+	if (type == "container_end") {
+		parseContainerEnd(data);
+		return;
 	}
 
 	if (type == "list") {

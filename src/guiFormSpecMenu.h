@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #define GUIINVENTORYMENU_HEADER
 
 #include <utility>
+#include <stack>
 
 #include "irrlichttypes_extrabloated.h"
 #include "inventory.h"
@@ -373,6 +374,7 @@ protected:
 	v2s32 imgsize;
 	v2s32 offset;
 	v2s32 pos_offset;
+	std::stack<v2s32> container_stack;
 
 	irr::IrrlichtDevice* m_device;
 	InventoryManager *m_invmgr;
@@ -468,7 +470,8 @@ private:
 	void parseElement(parserData* data, std::string element);
 
 	void parseSize(parserData* data, std::string element);
-	void parseOffset(parserData* data, std::string element);
+	void parseContainer(parserData* data, std::string element);
+	void parseContainerEnd(parserData* data);
 	void parseList(parserData* data, std::string element);
 	void parseListRing(parserData* data, std::string element);
 	void parseCheckbox(parserData* data, std::string element);

@@ -372,6 +372,7 @@ protected:
 	v2s32 spacing;
 	v2s32 imgsize;
 	v2s32 offset;
+	v2s32 pos_offset;
 
 	irr::IrrlichtDevice* m_device;
 	InventoryManager *m_invmgr;
@@ -464,13 +465,14 @@ private:
 
 	fs_key_pendig current_keys_pending;
 
-	void parseElement(parserData* data,std::string element);
+	void parseElement(parserData* data, std::string element);
 
-	void parseSize(parserData* data,std::string element);
-	void parseList(parserData* data,std::string element);
-	void parseListRing(parserData* data,std::string element);
-	void parseCheckbox(parserData* data,std::string element);
-	void parseImage(parserData* data,std::string element);
+	void parseSize(parserData* data, std::string element);
+	void parseOffset(parserData* data, std::string element);
+	void parseList(parserData* data, std::string element);
+	void parseListRing(parserData* data, std::string element);
+	void parseCheckbox(parserData* data, std::string element);
+	void parseImage(parserData* data, std::string element);
 	void parseItemImage(parserData* data,std::string element);
 	void parseButton(parserData* data,std::string element,std::string typ);
 	void parseBackground(parserData* data,std::string element);
@@ -557,4 +559,3 @@ public:
 };
 
 #endif
-

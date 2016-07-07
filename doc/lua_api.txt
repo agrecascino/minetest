@@ -1412,6 +1412,11 @@ examples.
 * `fixed_size`: `true`/`false` (optional)
 * deprecated: `invsize[<W>,<H>;]`
 
+#### `offset[<X>,<Y>]`
+* Move all elements defined after this by (X, Y)
+* Good for modifying formspec elements you didn't write (eg: writing a formspec theme for sfinv)
+* Not recommended to be used to make lists.
+
 #### `list[<inventory location>;<list name>;<X>,<Y>;<W>,<H>;]`
 * Show an inventory list
 
@@ -1955,7 +1960,7 @@ Call these functions only at load time!
 * `minetest.register_privilege(name, definition)`
     * `definition`: `"description text"`
     * `definition`: `{ description = "description text", give_to_singleplayer = boolean}`
-      the default of `give_to_singleplayer` is true 
+      the default of `give_to_singleplayer` is true
     * To allow players with basic_privs to grant, see basic_privs minetest.conf setting.
 * `minetest.register_authentication_handler(handler)`
     * See `minetest.builtin_auth_handler` in `builtin.lua` for reference

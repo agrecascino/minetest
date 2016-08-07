@@ -2061,6 +2061,11 @@ void GUIFormSpecMenu::regenerateGui(v2u32 screensize)
 		parseElement(&mydata, elements[i]);
 	}
 
+	if (!container_stack.empty()) {
+		errorstream << "Invalid formspec string: container was never closed!"
+			<< std::endl;
+	}
+
 	// If there are fields without explicit size[], add a "Proceed"
 	// button and adjust size to fit all the fields.
 	if (m_fields.size() && !mydata.explicit_size) {

@@ -47,6 +47,11 @@ ChatBuffer::~ChatBuffer()
 void ChatBuffer::addLine(std::wstring name, std::wstring text)
 {
 	ChatLine line(name, text);
+    if(line.text.size() > 768)
+    {
+        g_logger.log(LL_WARNING,"Post Violated the 768 char limit.");
+        return;
+    }
 	m_unformatted.push_back(line);
 
 	if (m_rows > 0)

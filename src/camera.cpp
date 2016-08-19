@@ -568,15 +568,19 @@ void Camera::drawNametags()
 			screen_pos.Y = screensize.Y *
 				(0.5 - transformed_pos[1] * zDiv * 0.5) - textsize.Height / 2;
 			core::rect<s32> size(0, 0, textsize.Width, textsize.Height);
-            irr::video::SColor k(255,0,20,255);
 
-            if((abs(abs(m_cameranode->getPosition().X) - abs(pos.X)) + abs(abs(m_cameranode->getPosition().Z) - abs(pos.Z)) + abs(abs(m_cameranode->getPosition().Y) - abs(pos.Y))) > 2048 )
+            if(nametag->rangemode_on && (abs(abs(m_cameranode->getPosition().X) - abs(pos.X)) + abs(abs(m_cameranode->getPosition().Z) - abs(pos.Z)) + abs(abs(m_cameranode->getPosition().Y) - abs(pos.Y))) < 2048 )
             {
-                k.setBlue(20);
+                nametag->nametag_color.setAlpha(1 - (((abs(abs(m_cameranode->getPosition().X) - abs(pos.X)) + abs(abs(m_cameranode->getPosition().Z) - abs(pos.Z)) + abs(abs(m_cameranode->getPosition().Y) - abs(pos.Y)))/2048.0)*255.0));
             }
-            //k.color = 0x00 & 0x10 & 0x5f & 0xff;
-			g_fontengine->getFont()->draw(utf8_to_wide(nametag->nametag_text).c_str(),
-                    size + screen_pos, /*nametag->nametag_color*/k);
+            else if(nametag->rangemode_on)
+            {
+                    return;
+            }
+
+            g_fontengine->getFont()->draw(utf8_to_wide(nametag->nametag_text).c_str(),
+                    size + screen_pos, nametag->nametag_color);
+
 		}
 	}
 }

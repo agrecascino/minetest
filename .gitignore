@@ -87,3 +87,5 @@ build/android/local.properties
 build/android/.gradle
 timestamp
 
+## QT Creator
+*.user

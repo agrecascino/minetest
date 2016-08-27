@@ -3690,6 +3690,7 @@ bool GUIFormSpecMenu::OnEvent(const SEvent& event)
 							s.fid == event.GUIEvent.Caller->getID()) {
 						current_field_enter_pending = s.fname;
 						close_on_enter = s.close_on_enter;
+						break;
 					}
 				}
 

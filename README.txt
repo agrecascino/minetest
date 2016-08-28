@@ -6,6 +6,11 @@ An InfiniMiner/Minecraft inspired game.
 Copyright (c) 2010-2013 Perttu Ahola <celeron55@gmail.com>
 and contributors (see source file comments and the version control log)
 
+This fork:
+----------
+This is a fork filled with stuff I want to work on, that'll probably never get merged to master.
+Code generally here https://blog.codinghorror.com/content/images/uploads/2007/03/6a0120a85dcdae970b0128776ff992970c-pi.png
+
 In case you downloaded the source code:
 ---------------------------------------
 If you downloaded the Minetest Engine source code in which this file is

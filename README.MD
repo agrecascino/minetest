@@ -9,7 +9,7 @@ and contributors (see source file comments and the version control log)
 This fork:
 ----------
 This is a fork filled with stuff I want to work on, that'll probably never get merged to master.
-Code generally here https://blog.codinghorror.com/content/images/uploads/2007/03/6a0120a85dcdae970b0128776ff992970c-pi.png
+Code generally here ![alt text](https://blog.codinghorror.com/content/images/uploads/2007/03/6a0120a85dcdae970b0128776ff992970c-pi.png "it just werks")
 
 In case you downloaded the source code:
 ---------------------------------------

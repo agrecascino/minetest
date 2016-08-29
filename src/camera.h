@@ -40,17 +40,17 @@ struct Nametag {
 	Nametag(scene::ISceneNode *a_parent_node,
 			const std::string &a_nametag_text,
             const video::SColor &a_nametag_color,
-            bool a_rangemode_on=false):
+            bool a_rangemode_on=true):
 		parent_node(a_parent_node),
 		nametag_text(a_nametag_text),
         nametag_color(a_nametag_color),
         rangemode_on(a_rangemode_on)
 	{
 	}
-    bool rangemode_on;
 	scene::ISceneNode *parent_node;
 	std::string nametag_text;
 	video::SColor nametag_color;
+	bool rangemode_on;
 };
 
 enum CameraMode {CAMERA_MODE_FIRST, CAMERA_MODE_THIRD, CAMERA_MODE_THIRD_FRONT};

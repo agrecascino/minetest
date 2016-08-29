@@ -546,12 +546,22 @@ void Camera::drawNametags()
 			i = m_nametags.begin();
 			i != m_nametags.end(); ++i) {
 		Nametag *nametag = *i;
-		if (nametag->nametag_color.getAlpha() == 0) {
-			// Enforce hiding nametag,
-			// because if freetype is enabled, a grey
-			// shadow can remain.
-			continue;
+		float total_distance = sqrt(pow((m_cameranode->getPosition().X/10.0 - (/*m_camera_offset.X/10.0 + */nametag->parent_node->getPosition().X/10.0)),2) + pow((m_cameranode->getPosition().Y/10.0 - (/*m_camera_offset.Y/10.0 + */nametag->parent_node->getPosition().Y/10.0)),2) + pow((m_cameranode->getPosition().Z/10.0 - (/*m_camera_offset.Z/10.0 + */nametag->parent_node->getPosition().Z/10.0)),2));
+		if(nametag->rangemode_on && total_distance < 64 ) {
+		    nametag->nametag_color.setAlpha((1 - (total_distance/64))*255.0);
 		}
+		else if(nametag->rangemode_on) {
+		    continue;
+		}
+		else {
+		    if (nametag->nametag_color.getAlpha() == 0) {
+		    	// Enforce hiding nametag,
+		    	// because if freetype is enabled, a grey
+		    	// shadow can remain.
+		    	continue;
+		    }
+		}
+		
 		v3f pos = nametag->parent_node->getPosition() + v3f(0.0, 1.1 * BS, 0.0);
 		f32 transformed_pos[4] = { pos.X, pos.Y, pos.Z, 1.0f };
 		trans.multiplyWith1x4Matrix(transformed_pos);
@@ -568,15 +578,6 @@ void Camera::drawNametags()
 			screen_pos.Y = screensize.Y *
 				(0.5 - transformed_pos[1] * zDiv * 0.5) - textsize.Height / 2;
 			core::rect<s32> size(0, 0, textsize.Width, textsize.Height);
-
-            if(nametag->rangemode_on && (abs(abs(m_cameranode->getPosition().X) - abs(pos.X)) + abs(abs(m_cameranode->getPosition().Z) - abs(pos.Z)) + abs(abs(m_cameranode->getPosition().Y) - abs(pos.Y))) < 2048 )
-            {
-                nametag->nametag_color.setAlpha(1 - (((abs(abs(m_cameranode->getPosition().X) - abs(pos.X)) + abs(abs(m_cameranode->getPosition().Z) - abs(pos.Z)) + abs(abs(m_cameranode->getPosition().Y) - abs(pos.Y)))/2048.0)*255.0));
-            }
-            else if(nametag->rangemode_on)
-            {
-                    return;
-            }
 
             g_fontengine->getFont()->draw(utf8_to_wide(nametag->nametag_text).c_str(),
                     size + screen_pos, nametag->nametag_color);

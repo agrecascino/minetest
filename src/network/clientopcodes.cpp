@@ -110,7 +110,7 @@ const ToClientCommandHandler toClientCommandTable[TOCLIENT_NUM_MSG_TYPES] =
 	{ "TOCLIENT_DELETE_PARTICLESPAWNER",   TOCLIENT_STATE_CONNECTED, &Client::handleCommand_DeleteParticleSpawner }, // 0x53
 	null_command_handler,
 	null_command_handler,
-	null_command_handler,
+	{ "TOCLIENT_FORCE_UNLOAD_OBJECT", TOCLIENT_STATE_CONNECTED,&Client::handleCommand_ForceUnloadObject},
 	null_command_handler,
 	null_command_handler,
 	null_command_handler,

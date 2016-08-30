@@ -664,13 +664,13 @@ void GUIFormSpecMenu::parseBackground(parserData* data,std::string element)
 		if (!data->explicit_size)
 			warningstream<<"invalid use of background without a size[] element"<<std::endl;
 
+		bool clip = false;
 		if (parts.size() == 4 && is_yes(parts[3])) {
 			pos.X = stoi(v_pos[0]); //acts as offset
 			pos.Y = stoi(v_pos[1]); //acts as offset
-			m_backgrounds.push_back(ImageDrawSpec(name, pos, geom, true));
-		} else {
-			m_backgrounds.push_back(ImageDrawSpec(name, pos, geom));
+			clip = true;
 		}
+		m_backgrounds.push_back(ImageDrawSpec(name, pos, geom, clip));
 
 		return;
 	}
